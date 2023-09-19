@@ -1,7 +1,6 @@
 import linkedinIcon from '../assets/icons-white/linkedin-white.png';
 import githubIcon from '../assets/icons-white/github-white.png';
 import twitterIcon from '../assets/icons-white/twitter-ico.png';
-import blogIcon from '../assets/icons-white/blog-ico.png';
 import youtubeIcon from '../assets/icons-white/yt-ico.png';
 const Footer = () => {
   return (
@@ -24,10 +23,9 @@ const Footer = () => {
             SOCIAL
           </h4>
           <div className='mt-5 flex gap-3'>
-            <a href="" className='ml-1'><img src={linkedinIcon} alt="" className='w-7 h-7'/></a>
-            <a href="" className='ml-1'><img src={githubIcon} alt="" className='w-7 h-7'/></a>
+            <a href="https://www.linkedin.com/in/adegboye-tommy-125098254" className='ml-1'><img src={linkedinIcon} alt="" className='w-7 h-7'/></a>
+            <a href="https://github.com/999tommy" className='ml-1'><img src={githubIcon} alt="" className='w-7 h-7'/></a>
             <a href="" className='ml-1'><img src={twitterIcon} alt="" className='w-7 h-7'/></a>
-            <a href="" className='ml-1'><img src={blogIcon} alt="" className='w-7 h-7'/></a>
             <a href="" className='ml-1'><img src={youtubeIcon} alt="" className='w-7 h-7'/></a>
           </div>
         </div>
