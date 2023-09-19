@@ -31,21 +31,21 @@ const Header = () => {
         >
           {open ? <XMarkIcon /> : <Bars3Icon />}
         </div>
-        {/* linke items */}
+        {/* linked items */}
         <ul
-          className={`md:flex md:items-center items-center md:pb-0 absolute md:static  md:z-auto z-50 left-0 w-full md:w-auto mt-4 md:mt-0 md:pl-0  bg-white sm:bg-transparent  ${
+          className={`md:flex md:items-center items-center md:pb-0 absolute md:static md:text-[#1f2833] md:z-auto z-50 left-0 w-full md:w-auto mt-4 md:mt-0 md:pl-0  bg-white sm:bg-transparent  ${
             open ? "top-12" : "top-[-490px]"
           }`}
         >
           {Links.map((link) => (
-            <li className="md:ml-8 md:my-0 mt-5 font-semibold text-xl border-b-2 md:border-b-0 text-right px-7 md:px-4 pb-4 md:pb-0 cursor-pointer" key={link.name}>
+            <li className="md:ml-8 md:my-0 mt-5 font-semibold text-xl border-b-2 md:border-b-0 text-right md:text-[#1f2833] px-7 md:px-4 pb-4 md:pb-0 cursor-pointer" key={link.name}>
               <Link
                 to={link.link}
                 activeClass="active"
                 smooth={true}
                 spy={true}
                 offset={-100}
-                className="text-light hover:text-[#1f2833] duration-500 uppercase"
+                className="text-light md:text-[#1f2833] hover:text-[#1f2833] duration-500 uppercase"
               >
                 {link.name}
               </Link>

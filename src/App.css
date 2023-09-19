@@ -14,7 +14,7 @@
   background-color: #45a29e;
 }
 
-.portfolio .hero{
+ .hero{
   color: #0b0c10;
   background: linear-gradient(to right, #0b0c10, #1f2833),url(/src/assets/common-bg.svg);
   background-position: center;
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.portfolio .btn{
+ .btn{
   background: #66fcf1;
   color: #000;
   text-transform: uppercase;
@@ -38,12 +38,12 @@
   transition: transform .3s;
 }
 
-.portfolio .btn:hover {
+ .btn:hover {
   background: #45a29e;
   transform: translateY(-3px);
 }
 
-.portfolio .divider{
+ .divider{
   height: 5px;
   width: 3rem;
   background: #66fcf1;
@@ -51,8 +51,7 @@
   margin: 15px auto;
 
 }
-
-.portfolio .projects{
+ .projects{
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-gap: 5rem;
@@ -95,7 +94,7 @@ input, textarea{
 
 
 @media screen and (max-width: 576px){
-  .portfolio .projects{
+   .projects{
     grid-template-columns: repeat(1, 1fr);
   }
 }
