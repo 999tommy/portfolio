@@ -39,6 +39,7 @@ const router =createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' element={<Layout />}></Route>
+      <Route path='/projects' element={<Projects />}></Route>
       
       
     </Route>

@@ -12,9 +12,9 @@ const Footer = () => {
             ADEGBOYE TOMMY
           </h4>
           <p className="mt-5 text-sm leading-7 text-[#eee]">
-            A Frontend focused Web Developer building the Frontend of Websites
+            A MERN Fullstack-Stack Web Developer(Frontend Heavy) building the Frontend of Websites
             and Web Applications that leads to the success of the overall
-            product
+            product and bring ideas to web
           </p>
         </div>
         {/* social icons */}

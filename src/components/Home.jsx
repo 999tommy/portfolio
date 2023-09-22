@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
-import Youtube from "../assets/socials/youtube.svg";
+import Instagram from '../assets/socials/ig.svg'
 import GitHub from "../assets/socials/github.svg";
 import { TypeAnimation } from "react-type-animation";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
 
 // motion
 import { motion } from "framer-motion";
@@ -29,11 +29,11 @@ const Home = () => {
             className="font-semibold text-transparent leading-10 bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
             sequence={[
               // Same substring at the start will only be typed once, initially
-              "Designing for the Future, One Website at a Time.",
+              "Designing the future already",
               1000,
               "Designing for the Online Presence.",
               1000,
-              "Designing for the Pixel Perfect Experiences.",
+              "We bring ideas to life.",
               1000,
               "We Create, You Conquer.",
               1000,
@@ -44,11 +44,11 @@ const Home = () => {
           />
           {/* hero info */}
           <p className="text-[#c5c6c7] text-xl my-8">
-            A Frontend focused Web Developer building the Frontend of Websites
+            A MERN Fullstack-Stack Web Developer(FE Heavy) building creative and innovative Websites
             and Web Applications that leads to the success of the overall
-            product
+            product.
           </p>
-          <Link to="/projects" className="btn py-4 px-16">PROJECTS</Link>
+          <Link to="projects" smooth={true} className="btn py-4 px-16 cursor-pointer">PROJECTS</Link>
 
 
         </motion.div>
@@ -76,7 +76,7 @@ const Home = () => {
             href="#"
             className="p-3 hover:bg-[#66fcf1] block rounded transition-all duration-500"
           >
-            <img src={Youtube} alt="" className="w-10 h-10" />
+            <img src={Instagram} alt="" className="w-10 h-10" />
           </a>
         </div>
         <div className="my-1">
