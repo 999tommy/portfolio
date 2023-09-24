@@ -14,7 +14,7 @@ const Footer = () => {
           <p className="mt-5 text-sm leading-7 text-[#eee]">
             A MERN Fullstack-Stack Web Developer(Frontend Heavy) building the Frontend of Websites
             and Web Applications that leads to the success of the overall
-            product and bring ideas to web
+            product.
           </p>
         </div>
         {/* social icons */}
