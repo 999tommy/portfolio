@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Projects = () => {
     return (
         <div className='max-w-7xl mx-auto md:py-8 px-7' id="projects">
-            <Headline title={'PROJECTS'} subtitle={'Here you will find some of the personal and clients projects that I created with each project containing its own case study'}/>
+            <Headline title={'PERSONAL PROJECTS'} subtitle={'Here you will find some of the personal and clients projects that I created with each project containing its own case study'}/>
 
             <div>
                 {projects.map((project) => <div key={project.id}>
