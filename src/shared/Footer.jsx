@@ -11,11 +11,6 @@ const Footer = () => {
           <h4 className="text-white font-bold text-2xl tracking-wide">
             ADEGBOYE TOMMY
           </h4>
-          <p className="mt-5 text-sm leading-7 text-[#eee]">
-            A MERN Fullstack-Stack Web Developer(Frontend Heavy) building the Frontend of Websites
-            and Web Applications that leads to the success of the overall
-            product.
-          </p>
         </div>
         {/* social icons */}
         <div className='my-3'>
@@ -26,7 +21,6 @@ const Footer = () => {
             <a href="https://www.linkedin.com/in/adegboye-tommy-125098254" className='ml-1'><img src={linkedinIcon} alt="" className='w-7 h-7'/></a>
             <a href="https://github.com/999tommy" className='ml-1'><img src={githubIcon} alt="" className='w-7 h-7'/></a>
             <a href="" className='ml-1'><img src={twitterIcon} alt="" className='w-7 h-7'/></a>
-            <a href="" className='ml-1'><img src={youtubeIcon} alt="" className='w-7 h-7'/></a>
           </div>
         </div>
       </div>

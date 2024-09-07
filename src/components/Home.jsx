@@ -3,6 +3,7 @@ import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
 import Instagram from '../assets/socials/ig.svg'
 import GitHub from "../assets/socials/github.svg";
+import Tommy from "../assets/Tommy Resume.pdf"
 import { TypeAnimation } from "react-type-animation";
 import { Link } from 'react-scroll';
 
@@ -12,6 +13,19 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../variants";
 
 const Home = () => {
+
+
+  const pdfUrl = '../assets/Tommy Resume.pdf';
+
+  const openPDF = (pdfUrl) =>  {
+    const pdfWindow = window.open(pdfUrl, '_blank');
+    pdfWindow.focus();
+  }
+
+  const handleClick = () => {
+    openPDF(pdfUrl);
+  };
+
   return (
     <div className="hero my-8 md:py-8 px-7 relative" id="home">
       {/* hero info */}
@@ -22,8 +36,8 @@ const Home = () => {
         whileInView={"show"}
         viewport={{ once: false, amount: 0.7 }}
         className="text-center md:w-1/2">
-          <h1 className="text-[#66fcf1] text-5xl font-extrabold tracking-wider mb-8">
-            HEY, I'M ADEGBOYE TOMMY
+          <h1 className="text-[#66fcf1] text-5xl font-mono font-bold tracking-wider mb-8">
+            HEY, I'M TOMMY
           </h1>
           <TypeAnimation
             className="font-semibold text-transparent leading-10 bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
@@ -43,12 +57,17 @@ const Home = () => {
             repeat={Infinity}
           />
           {/* hero info */}
-          <p className="text-[#c5c6c7] text-xl my-8">
-            A MERN Fullstack-Stack Web Developer(FE Heavy) building creative and innovative Websites
+          <p className="text-[#c5c6c7] text-xl my-8 font-semibold">
+            A MERN Fullstack-Stack Software Engineer with 4+ years of experience that builds creative and innovative Websites
             and Web Applications that leads to the success of the overall
             product.
           </p>
-          <Link to="projects" smooth={true} className="btn py-4 px-16 cursor-pointer">PROJECTS</Link>
+         
+         <div>
+         <Link to="projects" smooth={true} className="btn py-4 px-16 cursor-pointer rounded-lg m-4">PROJECTS</Link>
+        <Link to="" smooth={true} onclick={handleClick} className="btn py-4 px-16 cursor-pointer rounded-lg ">View CV</Link>
+         
+         </div>
 
 
         </motion.div>

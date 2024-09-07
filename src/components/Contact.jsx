@@ -6,6 +6,27 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../variants";
 
 const Contact = () => {
+
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_k8r16q8","template_ig2kbef", form.current, {
+        publicKey: 'FAHNG1VGe5hs8ilJf',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
+
   return (
     <motion.div
       variants={fadeIn("right", 0.2)}
@@ -23,11 +44,11 @@ const Contact = () => {
       />
 
       <div className="md:w-2/3 mx-auto bg-[#45a29e] md:px-16 px-8 py-8 rounded-lg mb-32">
-        <form action="adegboyetommy@gmail.com">
+        <form ref={form} onSubmit={sendEmail}  action="">
           <label htmlFor="name">Name: </label>
           <input
             type="text"
-            name="name"
+            name="fullname"
             id="name"
             placeholder="Enter Your Name"
             className="p-5"
