@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import Headline from "../shared/Headline";
 
 // motion
