@@ -3,7 +3,7 @@ import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
 import Instagram from '../assets/socials/ig.svg'
 import GitHub from "../assets/socials/github.svg";
-import Tommy from "../assets/Tommy Resume.pdf"
+import Tommy from "../assets/Tomide Resume.pdf"
 import { TypeAnimation } from "react-type-animation";
 import { Link } from 'react-scroll';
 
@@ -15,7 +15,7 @@ import { fadeIn } from "../variants";
 const Home = () => {
 
 
-  const pdfUrl = '../assets/Tommy Resume.pdf';
+  const pdfUrl = '../assets/Tomide Resume.pdf';
 
   const openPDF = (pdfUrl) =>  {
     const pdfWindow = window.open(pdfUrl, '_blank');
@@ -65,7 +65,6 @@ const Home = () => {
          
          <div>
          <Link to="projects" smooth={true} className="btn py-4 px-16 cursor-pointer rounded-lg m-4">PROJECTS</Link>
-        <Link to="" smooth={true} onclick={handleClick} className="btn py-4 px-16 cursor-pointer rounded-lg ">View CV</Link>
          
          </div>
 
