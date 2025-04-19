@@ -3,7 +3,7 @@ import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
 import Instagram from '../assets/socials/ig.svg'
 import GitHub from "../assets/socials/github.svg";
-import Tommy from "../assets/Tomide Resume.pdf"
+import ResumePDF from "../assets/Tomide Resume.pdf";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from 'react-scroll';
 import Model3D from './3DModel';
@@ -15,17 +15,9 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../variants";
 
 const Home = () => {
-
-
-  const pdfUrl = '../assets/Tomide Resume.pdf';
-
-  const openPDF = (pdfUrl) =>  {
-    const pdfWindow = window.open(pdfUrl, '_blank');
-    pdfWindow.focus();
-  }
-
-  const handleClick = () => {
-    openPDF(pdfUrl);
+  const handleResumeClick = () => {
+    
+    window.open(ResumePDF, '_blank');
   };
 
   return (
@@ -79,7 +71,7 @@ const Home = () => {
               PROJECTS
             </Link>
             <motion.button 
-              onClick={handleClick}
+              onClick={handleResumeClick}
               className="py-4 px-12 cursor-pointer rounded-lg border-2 border-accent text-accent font-bold hover:bg-accent/10 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -122,7 +114,7 @@ const Home = () => {
         </div>
         <div className="my-2">
           <a
-            href="#"
+            href="https://x.com/999tommy__?t=KEYyQorY2ueKnzR0CBrRg&s=09"
             className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
           >
             <img src={Twitter} alt="Twitter" className="w-8 h-8" />
@@ -130,7 +122,7 @@ const Home = () => {
         </div>
         <div className="my-2">
           <a
-            href="#"
+            href="https://www.instagram.com/syntaxdev__"
             className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
           >
             <img src={Instagram} alt="Instagram" className="w-8 h-8" />

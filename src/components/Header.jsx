@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import profileImg from '../assets/man.png';
 import { motion, AnimatePresence } from "framer-motion";
+import ResumePDF from "../assets/Tomide Resume.pdf";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,11 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleResumeClick = () => {
+    
+    window.open(ResumePDF, '_blank');
+  };
 
   return (
     <div className="w-full fixed top-0 left-0 right-0 z-50">
@@ -106,10 +112,8 @@ const Header = () => {
               </Link>
             </motion.div>
           ))}
-          <motion.a
-            href="https://github.com/999tommy"
-            target="_blank"
-            rel="noreferrer"
+          <motion.button
+            onClick={handleResumeClick}
             className="ml-4 px-5 py-2 bg-accent text-white rounded-lg font-semibold hover:bg-accent-light transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -118,7 +122,7 @@ const Header = () => {
             transition={{ delay: navLinks.length * 0.1 + 0.3 }}
           >
             Résumé
-          </motion.a>
+          </motion.button>
         </nav>
       </motion.div>
 
@@ -155,10 +159,8 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
-              <motion.a
-                href="https://github.com/999tommy"
-                target="_blank"
-                rel="noreferrer"
+              <motion.button
+                onClick={handleResumeClick}
                 className="mt-8 px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent-light transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -167,7 +169,7 @@ const Header = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 Résumé
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         )}
