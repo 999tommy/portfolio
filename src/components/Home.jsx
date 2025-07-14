@@ -57,8 +57,8 @@ const Home = () => {
             repeat={Infinity}
           />
           <p className="text-text-secondary text-xl my-8 font-semibold leading-relaxed">
-            A MERN Fullstack-Stack Software Engineer with 4+ years of experience that builds creative and innovative Websites
-            and Web Applications that leads to the success of the overall product.
+            A Fullstack-Stack Software Developer and Founder with 4+ years of experience that builds creative and innovative Websites
+            and Web Applications and Mobile Apps that leads to the success of the overall product.
           </p>
           
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
