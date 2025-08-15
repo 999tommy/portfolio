@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <motion.div 
-      className="hero px-7 relative min-h-screen flex items-center justify-center" 
+      className="hero px-7 py-12 relative min-h-screen flex items-center justify-center" 
       id="home"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

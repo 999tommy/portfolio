@@ -54,7 +54,6 @@ const Particles = ({ count = 1500 }) => {
     // Update particles position
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
-      particlesGeometry.attributes.position.array[i3] += Math.sin(time * particles[i].speed + particles[i].factor) * 0.001;
       particlesGeometry.attributes.position.array[i3 + 1] += Math.cos(time * particles[i].speed + particles[i].factor) * 0.001;
       particlesGeometry.attributes.position.array[i3 + 2] += Math.sin(time * particles[i].speed + particles[i].factor) * 0.001;
     }

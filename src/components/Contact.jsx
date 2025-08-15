@@ -2,8 +2,6 @@ import React, { useRef, useState } from "react";
 import Headline from "../shared/Headline";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { fadeIn } from "../variants";
-import { Canvas } from "@react-three/fiber";
-import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 
 const ContactSphere = () => {
   return (
