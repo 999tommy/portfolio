@@ -1,11 +1,23 @@
 // contact.jsx
-import React from "react";
+import React, { useState } from "react";
 import Headline from "../shared/Headline";
 import { motion } from "framer-motion";
 import { fadeIn } from "../variants";
-import { FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaCheck, FaCopy } from 'react-icons/fa';
 
 const Contact = () => {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('adegboyetommy@gmail.com');
+      setCopied(true);
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
   return (
     <div className="relative py-20 px-7 bg-charcoal text-white" id="contact">
       {/* Terminal prompt for section */}
@@ -34,18 +46,30 @@ const Contact = () => {
           >
             <div className="flex items-center gap-2 text-cyan">
               <FaEnvelope className="text-sm" />
-              <span className="text-sm">adebgoyetommy@gmail.com</span>
+              <span className="text-sm">adegboyetommy@gmail.com</span>
             </div>
             <div className="flex items-center gap-2 text-cyan">
               <FaPhone className="text-sm" />
               <span className="text-sm">+234 913 129 8538</span>
             </div>
             <motion.button
+              onClick={copyToClipboard}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-4 px-4 py-2 bg-cyan text-black rounded-lg font-bold hover:bg-green transition-all"
+              className="mt-4 px-4 py-2 bg-cyan text-black rounded-lg font-bold hover:bg-green transition-all flex items-center gap-2"
+              aria-label="Copy email to clipboard"
             >
-              $ copy to clipboard
+              {copied ? (
+                <>
+                  <FaCheck className="text-green-700" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <FaCopy />
+                  <span>Copy Email</span>
+                </>
+              )}
             </motion.button>
           </motion.div>
           

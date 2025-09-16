@@ -21,7 +21,6 @@ const Header = () => {
     { name: "Contact", link: "contact" },
   ];
 
-  // Handle scroll event to change header styling
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
