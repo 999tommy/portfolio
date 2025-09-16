@@ -1,126 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
 
+/* Root and global settings */
 #root {
   margin: 0 auto;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Code Pro', monospace;
+  background: #1a1d21; /* Charcoal background */
+  color: #e4e4e7; /* Light text for readability */
 }
 
-/* Smooth page scrolling */
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Adjust based on your header height */
+  scroll-padding-top: 70px; /* Adjusted for fixed header */
 }
 
-/* Scrollbar Styling */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #0f172a;
+  background: #1a1d21;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #38bdf8;
-  border-radius: 10px;
+  background: #00bcd4; /* Cyan accent */
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #0284c7;
+  background: #26a69a; /* Greenish hover */
 }
 
-/* Hero Section */
-.hero {
-  color: #f8fafc;
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  position: relative;
-  overflow: hidden;
+/* Terminal window styling */
+.terminal-window {
+  background: linear-gradient(to bottom, #1a1d21, #25282c); /* Subtle gradient */
+  border: 1px solid #00bcd4/20;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
 }
 
-/* Button Styling */
-.btn {
-  background: #38bdf8;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: inline-block;
-  font-weight: 700;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  box-shadow: 0 5px 15px 0 rgba(56, 189, 248, 0.35);
+/* Terminal black for cards and panels */
+.terminal-black {
+  background: #25282c; /* Slightly lighter for contrast */
+}
+
+/* Prompt buttons */
+.prompt-btn {
+  background: transparent;
+  border: 1px solid #00bcd4;
+  color: #00bcd4;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   transition: all 0.3s ease;
 }
-
-.btn:hover {
-  background: #0284c7;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px 0 rgba(56, 189, 248, 0.45);
+.prompt-btn:hover {
+  background: #00bcd4;
+  color: #000;
+  transform: translateY(-2px);
 }
 
-/* Section Divider */
+/* Colors for terminal-like accents */
+.text-white { color: #e4e4e7; }
+.text-cyan { color: #00bcd4; }
+.text-green { color: #26a69a; }
+.text-yellow { color: #ffca28; }
+.bg-charcoal { background: #1a1d21; }
+.bg-terminal-black { background: #25282c; }
+
+/* Divider for headlines */
 .divider {
-  height: 4px;
-  width: 3rem;
-  background: #38bdf8;
-  border-radius: 5px;
-  margin: 15px auto;
+  height: 2px;
+  width: 2rem;
+  background: #00bcd4;
+  border-radius: 2px;
+  margin: 10px auto;
 }
 
-/* Projects Grid - Overridden by Tailwind Grid */
+/* Projects grid */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 2rem;
-  margin-bottom: 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
-/* Contact Section */
-.contact {
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  padding: 4rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
-
-/* Form Elements */
-label {
-  color: #f8fafc;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  font-weight: 600;
-  display: block;
-  text-align: left;
-  margin: 20px 0 10px 0;
-}
-
-input, textarea {
-  color: #f8fafc;
-  width: 100%;
-  border: 2px solid #0284c7;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  background: #1e293b;
-  border-radius: 9px;
-  font-weight: 400;
-  padding: 0.75rem 1rem;
-  transition: all 0.3s ease;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
-}
-
-/* Animation Classes */
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+.animate-pulse {
+  animation: blink 1s step-end infinite;
 }
 
 /* Smooth page transitions */
@@ -129,48 +98,39 @@ input:focus, textarea:focus {
 }
 .page-transition-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in-out;
+  transition: opacity 600ms ease-in-out;
 }
 .page-transition-exit {
   opacity: 1;
 }
 .page-transition-exit-active {
   opacity: 0;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
 }
 
-/* Background Blur Element */
-.backdrop-blur-sm {
-  backdrop-filter: blur(8px);
-}
-
-/* Section transition effect */
-section {
-  transition: all 0.5s ease-in-out;
-}
+/* Section highlight animation */
 section:target {
-  animation: highlight 1.5s ease-out;
+  animation: highlight 1s ease-out;
 }
 @keyframes highlight {
-  0% { background-color: rgba(56, 189, 248, 0.2); }
+  0% { background-color: rgba(0, 188, 212, 0.1); }
   100% { background-color: transparent; }
 }
 
-/* Responsive Media Queries */
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
-  .btn {
-    font-size: 0.9rem;
-    padding: 0.75rem 1.5rem;
-  }
-  
   .projects {
     grid-template-columns: 1fr;
+  }
+  .prompt-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
   }
 }
 
 @media screen and (max-width: 576px) {
   .divider {
-    margin: 10px auto;
+    margin: 8px auto;
   }
   html {
     scroll-padding-top: 60px;

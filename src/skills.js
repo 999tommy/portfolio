@@ -1,6 +1,7 @@
 const skills = [
 
     {id: 1, title: 'JavaScript'},
+    {id: 1, title: 'Web3'},
     {id: 2, title: 'ReactJs'},
     {id: 3, title: 'TailwindCSS'},
     {id: 4, title: 'GIT'},
@@ -14,9 +15,18 @@ const skills = [
     {id: 12, title: 'React Native'},
     {id: 13, title: 'Mongoose'},
     {id: 14, title: 'AWS Technologies'},
-    {id: 15, title: 'Claude Code'},
+    {id: 15, title: 'React Native'},
     {id: 16, title: 'Code Debugging'},
     {id: 17, title: 'UI Improvement'},
+    {id: 17, title: 'Expo'},
+    {id: 18, title: 'PostgreSQL'},
+    {id: 19, title: 'Figma'},
+    {id: 20, title: 'Solidity'},
+    {id: 20, title: 'Hardhat'},
+    {id: 20, title: 'Three.js'},
+    {id: 20, title: 'Zustand'},
+    {id: 20, title: 'LongChain'},
+    {id: 20, title: 'AI Engineering'},
 ]
 
 export default skills;

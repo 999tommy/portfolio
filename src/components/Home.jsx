@@ -1,12 +1,12 @@
+// home.jsx
 /* eslint-disable react/no-unescaped-entities */
 import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
 import Instagram from '../assets/socials/ig.svg'
 import GitHub from "../assets/socials/github.svg";
-import ResumePDF from "../assets/Tomide Resume.pdf";
+import ResumePDF from "../assets/Adegboye_Ayotomide_Resume.pdf";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from 'react-scroll';
-import Model3D from './3DModel';
 import ScrollIndicator from './ScrollIndicator';
 
 // motion
@@ -16,129 +16,120 @@ import { fadeIn } from "../variants";
 
 const Home = () => {
   const handleResumeClick = () => {
-    
     window.open(ResumePDF, '_blank');
   };
 
   return (
     <motion.div 
-      className="hero px-7 py-12 relative min-h-screen flex items-center justify-center" 
+      className="terminal-window bg-charcoal text-white min-h-screen flex flex-col px-4 py-8 relative" 
       id="home"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        {/* Left column - Text content */}
+      {/* Terminal title bar */}
+      <div className="flex items-center justify-between bg-terminal-black/80 border-b border-cyan/30 px-4 py-2 rounded-lg-t-lg mb-4">
+        <div className="flex space-x-2">
+          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+        <span className="text-xs font-mono text-cyan">~ user@portfolio:~$</span>
+        <div className="w-20"></div>
+      </div>
+
+      <div className="flex-1 flex flex-col md:flex-row items-start justify-between">
+        {/* Main terminal content */}
         <motion.div 
           variants={fadeIn("up", 0.3)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.7 }}
-          className="md:w-1/2 text-center md:text-left z-10 mb-10 md:mb-0"
+          className="md:w-1/2 text-left z-10"
         >
-          <h1 className="text-accent text-5xl font-mono font-bold tracking-wider mb-6">
-            HEY, I'M TOMMY
+          <div className="font-mono text-cyan mb-4">
+            <span className="text-green">$ whoami</span>
+            <span className="animate-pulse ml-1">|</span>
+          </div>
+          <h1 className="text-4xl font-bold tracking-wider mb-4 text-white">
+            Tommy Adegboye
           </h1>
+          <p className="text-cyan text-lg mb-4">Fullstack Developer</p>
           <TypeAnimation
-            className="font-semibold text-transparent leading-10 bg-clip-text bg-gradient-to-r from-highlight-purple to-highlight-pink"
+            className="text-lg leading-relaxed mb-8"
             sequence={[
-              "Designing the future already",
+              "git clone https://github.com/999tommy/portfolio.git",
               1000,
-              "Designing for the Online Presence.",
+              "cd portfolio && npm install",
               1000,
-              "We bring ideas to life.",
-              1000,
-              "We Create, You Conquer.",
+              "npm run dev",
               1000,
             ]}
             speed={50}
-            style={{ fontSize: "2em" }}
             repeat={Infinity}
           />
-          <p className="text-text-secondary text-xl my-8 font-semibold leading-relaxed">
-            A Fullstack-Stack Software Developer and Founder with 4+ years of experience that builds creative and innovative Websites
-            and Web Applications and Mobile Apps that leads to the success of the overall product.
+          <p className="text-gray-300 text-sm my-4 font-mono leading-relaxed">
+            Building scalable web apps with Nextjs, Node.js, and a dash of creativity. 3+ years crafting code that makes a difference with pefromance and user experience in mind.
           </p>
           
-          <div className="flex flex-wrap justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap gap-4 mt-6">
             <Link 
               to="projects" 
               smooth={true} 
               duration={800}
-              className="btn py-4 px-12 cursor-pointer rounded-lg bg-gradient-to-r from-accent to-accent-light hover:from-accent-light hover:to-accent text-white font-bold shadow-lg transform hover:scale-105 transition-all"
+              className="prompt-btn text-cyan hover:text-green border border-cyan px-4 py-2 rounded-lg font-mono transition-colors"
             >
-              PROJECTS
+              $ ls projects/
             </Link>
             <motion.button 
               onClick={handleResumeClick}
-              className="py-4 px-12 cursor-pointer rounded-lg border-2 border-accent text-accent font-bold hover:bg-accent/10 transition-all"
+              className="prompt-btn text-cyan hover:text-green border border-cyan px-4 py-2 rounded-lg font-mono transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              RESUME
+              $ cat resume.pdf
             </motion.button>
           </div>
         </motion.div>
 
-        {/* Right column - 3D Model */}
+        {/* Sidebar status - GitHub-like */}
         <motion.div 
           variants={fadeIn("left", 0.5)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.7 }}
-          className="md:w-1/2 flex justify-center items-center z-10"
+          className="md:w-1/2 flex justify-end items-start z-10 mt-8 md:mt-0"
         >
-          <div className="w-full max-w-[500px] h-[400px] animate-float">
-            <Model3D />
+          <div className="w-full max-w-md bg-terminal-black/50 border border-cyan/20 rounded-lg p-4 font-mono">
+            <div className="text-xs text-gray-400 mb-2">Status</div>
+            <div className="space-y-1">
+              <div className="flex justify-between text-sm">
+                <span>Branch:</span>
+                <span className="text-green">main</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Commits:</span>
+                <span className="text-cyan">42</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Stars:</span>
+                <span className="text-yellow">★ 127</span>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Socials sidebar */}
-      <motion.div 
-        className="bg-[#38bdf8] backdrop-blur-md rounded-r-3xl py-3 px-2 fixed left-0 top-1/3 hidden md:block z-20"
-        initial={{ x: -100 }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
-      >
-        <div className="my-2">
-          <a
-            href="https://www.linkedin.com/in/adegboye-tommy-125098254"
-            className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
-            target="_blank" 
-            rel="noreferrer"
-          >
-            <img src={LinkedIn} alt="LinkedIn" className="w-8 h-8" />
-          </a>
+      {/* Socials as terminal commands */}
+      <div className="mt-8 pt-4 border-t border-cyan/20">
+        <div className="font-mono text-green">$ social links</div>
+        <div className="flex space-x-4 mt-2">
+          <a href="https://www.linkedin.com/in/adegboye-tommy-125098254" className="text-cyan hover:text-green transition-colors"><img src={LinkedIn} alt="LinkedIn" className="w-5 h-5" /></a>
+          <a href="https://x.com/999tommy__?t=KEYyQorY2ueKnzR0CBrRg&s=09" className="text-cyan hover:text-green transition-colors"><img src={Twitter} alt="Twitter" className="w-5 h-5" /></a>
+          <a href="https://www.instagram.com/syntaxdev__" className="text-cyan hover:text-green transition-colors"><img src={Instagram} alt="Instagram" className="w-5 h-5" /></a>
+          <a href="https://github.com/999tommy" className="text-cyan hover:text-green transition-colors"><img src={GitHub} alt="GitHub" className="w-5 h-5" /></a>
         </div>
-        <div className="my-2">
-          <a
-            href="https://x.com/999tommy__?t=KEYyQorY2ueKnzR0CBrRg&s=09"
-            className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
-          >
-            <img src={Twitter} alt="Twitter" className="w-8 h-8" />
-          </a>
-        </div>
-        <div className="my-2">
-          <a
-            href="https://www.instagram.com/syntaxdev__"
-            className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
-          >
-            <img src={Instagram} alt="Instagram" className="w-8 h-8" />
-          </a>
-        </div>
-        <div className="my-2">
-          <a
-            href="https://github.com/999tommy"
-            className="p-3 text-white hover:bg-accent/20 block rounded transition-all duration-500"
-            target="_blank" 
-            rel="noreferrer"
-          >
-            <img src={GitHub} alt="GitHub" className="w-8 h-8" />
-          </a>
-        </div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <ScrollIndicator />

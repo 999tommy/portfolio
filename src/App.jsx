@@ -1,3 +1,4 @@
+// app.jsx (minor updates for Experience inclusion and global styles)
 import './App.css'
 import {
   createBrowserRouter,
@@ -14,8 +15,8 @@ import Contact from './components/Contact'
 import Header from './components/Header'
 import Home from './components/Home'
 import Projects from './components/Projects'
+import Experience from './components/Experience' // Added
 import Footer from './shared/Footer'
-import ParticlesBackground from './components/ParticlesBackground'
 import { useEffect } from 'react';
 
 // Page transition animation settings
@@ -57,19 +58,19 @@ const ScrollToTop = () => {
 const Layout = () =>  {
   return (
     <motion.div
-      className='bg-primary text-text-DEFAULT portfolio relative'
+      className='bg-charcoal text-white portfolio relative font-mono' // Updated global classes
       initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants}
     >
       <ScrollToTop />
-      <ParticlesBackground />
       <Header/>
       <AnimatePresence mode="wait">
         <Home/>
         <About/>
         <Projects/>
+        <Experience /> {/* Added */}
         <ScrollRestoration/>
         <Outlet/>
         <Contact/>
@@ -99,7 +100,7 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <div className='font-sans'>
+    <div className='font-mono'> {/* Global font */}
       <AnimatePresence mode="wait">
         <RouterProvider router={router} />
       </AnimatePresence>

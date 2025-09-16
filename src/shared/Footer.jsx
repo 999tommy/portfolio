@@ -1,35 +1,32 @@
+// footer.jsx
 import linkedinIcon from '../assets/icons-white/linkedin-white.png';
 import githubIcon from '../assets/icons-white/github-white.png';
 import twitterIcon from '../assets/icons-white/twitter-ico.png';
 import youtubeIcon from '../assets/icons-white/yt-ico.png';
+
 const Footer = () => {
   return (
-    <div className="bg-[#1f2833] md:h-96 px-7">
-      <div className="max-w-7xl mx-auto py-20 flex flex-col md:flex-row justify-between">
+    <div className="bg-terminal-black border-t border-cyan/20 px-7 py-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* logo and description */}
-        <div className="md:w-2/5 my-3">
-          <h4 className="text-white font-bold text-2xl tracking-wide">
-            ADEGBOYE TOMMY
+        <div className="mb-4 md:mb-0">
+          <h4 className="text-cyan font-bold text-lg tracking-wide font-mono">
+            adegboye@portfolio:~$
           </h4>
         </div>
-        {/* social icons */}
-        <div className='my-3'>
-          <h4 className="text-white font-bold text-2xl tracking-wide ">
-            SOCIAL
-          </h4>
-          <div className='mt-5 flex gap-3'>
-            <a href="https://www.linkedin.com/in/adegboye-tommy-125098254" className='ml-1'><img src={linkedinIcon} alt="" className='w-7 h-7'/></a>
-            <a href="https://github.com/999tommy" className='ml-1'><img src={githubIcon} alt="" className='w-7 h-7'/></a>
-            <a href="" className='ml-1'><img src={twitterIcon} alt="" className='w-7 h-7'/></a>
-          </div>
+        {/* social icons as commands */}
+        <div className='flex gap-4'>
+          <a href="https://www.linkedin.com/in/adegboye-tommy-125098254" className='text-cyan hover:text-green transition-colors'><img src={linkedinIcon} alt="" className='w-5 h-5'/></a>
+          <a href="https://github.com/999tommy" className='text-cyan hover:text-green transition-colors'><img src={githubIcon} alt="" className='w-5 h-5'/></a>
+          <a href="" className='text-cyan hover:text-green transition-colors'><img src={twitterIcon} alt="" className='w-5 h-5'/></a>
         </div>
       </div>
 
-      <hr className='text-slate-50 opacity-30 px-7'/>
+      <hr className='border-gray-700 my-4'/>
 
       {/* copyright text */}
-      <div>
-        <p className='md:my-10 py-10 md:py-0 text-sm leading-7 text-[#eee] text-center'>© Copyright 2023. Made by <a href="" className='underline'>Adegboye Tommy</a></p>
+      <div className="text-center">
+        <p className='text-xs text-gray-400 font-mono'>© 2025 Tommy Adegboye | Built with React & Tailwind</p>
       </div>
     </div>
   );

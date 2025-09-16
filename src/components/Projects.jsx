@@ -1,3 +1,4 @@
+// project.tsx
 import Headline from "../shared/Headline";
 import projects from "../projects";
 import ProjectCard from "./ProjectCard";
@@ -6,10 +7,11 @@ import { motion } from "framer-motion";
 
 const Projects = () => {
     return (
-        <div className='max-w-7xl mx-auto py-20 px-7 relative' id="projects">
-            {/* Gradient background effects */}
-            <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-highlight-pink/10 rounded-full blur-3xl -z-10"></div>
-            <div className="absolute top-1/4 right-10 w-72 h-72 bg-highlight-blue/10 rounded-full blur-3xl -z-10"></div>
+        <div className='max-w-7xl mx-auto py-20 px-7 relative bg-charcoal text-white' id="projects">
+            {/* Terminal prompt for section */}
+            <div className="font-mono text-green mb-8 text-center">
+              $ ls projects/
+            </div>
             
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -18,34 +20,34 @@ const Projects = () => {
                 viewport={{ once: true, amount: 0.2 }}
             >
                 <Headline 
-                    title={"FEATURED PROJECTS"} 
-                    subtitle={"Explore some of my recent work showcasing creativity, technical skills, and problem-solving abilities"}
+                    title={"$ ls projects/"} 
+                    subtitle={"Grid of repos with tech badges, stars, and forks"}
                 />
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 bg-terminal-black/50 border border-cyan/20 rounded-lg p-6">
                 {projects.map((project) => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
             </div>
             
             <motion.div 
-                className="mt-16 text-center"
+                className="mt-8 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, amount: 0.2 }}
             >
-                <p className="text-text-secondary mb-6">
-                    Want to see more of my work? Check out my GitHub repositories for additional projects.
+                <p className="text-gray-300 mb-4 font-mono text-sm">
+                    More repos on GitHub.
                 </p>
                 <a 
                     href="https://github.com/999tommy"
                     target="_blank" 
                     rel="noreferrer" 
-                    className="inline-block py-3 px-8 bg-primary-light border border-accent/20 rounded-lg text-accent hover:bg-accent/10 transition-all"
+                    className="prompt-btn text-cyan hover:text-green border border-cyan px-4 py-2 rounded-lg font-mono transition-colors"
                 >
-                    View All Projects
+                  $ git clone https://github.com/999tommy
                 </a>
             </motion.div>
         </div>
