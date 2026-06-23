@@ -1,9 +1,6 @@
-// headline.jsx
+// headline.jsx — updated for new design system (kept as fallback, sections use inline headers now)
 /* eslint-disable react/prop-types */
-
-// motion
 import { motion } from "framer-motion";
-// variants
 import { fadeIn } from "../variants";
 
 const Headline = ({ title, subtitle }) => {
@@ -13,13 +10,34 @@ const Headline = ({ title, subtitle }) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.3 }}
-      className="text-center mx-auto md:w-2/3 my-8 font-mono"
+      className="mb-10"
+      style={{ fontFamily: "'Inter', sans-serif" }}
     >
-      <h2 className="text-3xl text-white font-bold tracking-wide mb-4">{title}</h2>
-      <div className="w-20 h-0.5 bg-cyan mx-auto rounded-full mb-4"></div>
-      <p className="text-gray-300 text-sm leading-6 md:w-3/4 text-center mx-auto">
-        {subtitle}
-      </p>
+      <h2
+        className="font-bold tracking-tight mb-3"
+        style={{
+          fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
+          color: '#f0f0f0',
+          letterSpacing: '-0.02em',
+          lineHeight: 1.15,
+        }}
+      >
+        {title}
+      </h2>
+      <div
+        style={{
+          width: '40px',
+          height: '3px',
+          background: 'linear-gradient(90deg, #D4A843, transparent)',
+          borderRadius: '2px',
+          marginBottom: '12px',
+        }}
+      />
+      {subtitle && (
+        <p style={{ color: 'rgba(232,232,232,0.5)', fontSize: '0.9rem', maxWidth: '480px', lineHeight: '1.65' }}>
+          {subtitle}
+        </p>
+      )}
     </motion.div>
   );
 };

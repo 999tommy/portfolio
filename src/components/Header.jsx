@@ -1,8 +1,5 @@
-// header.jsx (updated to include Experience in nav)
-import {
-  Bars2Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
+// header.jsx — liquid glass nav with dark-gold design
+import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import profileImg from '../assets/man.png';
@@ -12,162 +9,174 @@ import ResumePDF from "../assets/Adegboye_Ayotomide_Resume.pdf";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
+
   const navLinks = [
     { name: "Home", link: "home" },
     { name: "About", link: "about" },
-    { name: "Projects", link: "projects" },
     { name: "Experience", link: "experience" },
+    { name: "Projects", link: "projects" },
+    { name: "Credentials", link: "certificates" },
     { name: "Contact", link: "contact" },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleResumeClick = () => {
-    window.open(ResumePDF, '_blank');
-  };
+  const handleResumeClick = () => window.open(ResumePDF, '_blank');
 
   return (
     <div className="w-full fixed top-0 left-0 right-0 z-50">
-      <motion.div 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 20 }}
-        className={`flex items-center justify-between py-4 px-7 md:px-14 transition-all duration-500 font-mono ${
-          scrolled 
-            ? 'bg-terminal-black/90 backdrop-blur-md shadow-lg border-b border-cyan/20' 
-            : 'bg-transparent'
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 22 }}
+        className={`flex items-center justify-between py-3 px-6 md:px-12 transition-all duration-500 ${
+          scrolled ? 'glass-nav' : 'bg-transparent'
         }`}
       >
-        {/* Logo section */}
+        {/* Logo */}
         <Link to="home" smooth={true} duration={800} className="cursor-pointer">
-          <motion.div 
-            className="font-bold text-xl tracking-wide flex items-center gap-1 text-white"
-            whileHover={{ scale: 1.05 }}
+          <motion.div
+            className="flex items-center gap-2.5"
+            whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <div className="relative">
-              <img 
-                src={profileImg} 
-                alt="Tommy" 
-                className="md:w-8 md:h-8 w-6 h-6 rounded-full object-cover border-2 border-cyan relative z-10" 
+              <img
+                src={profileImg}
+                alt="Tommy"
+                className="w-8 h-8 rounded-full object-cover"
+                style={{ border: '2px solid #D4A843', boxShadow: '0 0 12px rgba(212,168,67,0.4)' }}
+              />
+              <span
+                className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-400 rounded-full border-2"
+                style={{ borderColor: '#0c0d14' }}
               />
             </div>
-            <span className="hover:text-cyan md:ml-2 ml-1 transition-colors">
-              tommy<span className="text-cyan">_codes</span>
-            </span>
+            <div className="leading-none">
+              <span className="font-bold text-sm text-white tracking-wide">Tommy</span>
+              <span className="text-gold-gradient font-bold text-sm ml-0.5"> Adegboye</span>
+            </div>
           </motion.div>
         </Link>
-        
+
         {/* Mobile menu button */}
-        <motion.div
+        <motion.button
           onClick={() => setOpen(!open)}
-          className="md:hidden cursor-pointer w-8 h-8 flex items-center justify-center rounded-lg text-cyan hover:bg-cyan/10 transition-colors"
-          whileHover={{ scale: 1.1 }}
+          className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+          style={{ border: '1px solid rgba(212,168,67,0.25)', background: 'rgba(212,168,67,0.06)', color: '#D4A843' }}
+          whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
+          aria-label="Toggle navigation menu"
         >
           {open ? <XMarkIcon className="w-5 h-5" /> : <Bars2Icon className="w-5 h-5" />}
-        </motion.div>
+        </motion.button>
 
-        {/* Navigation Links - Desktop */}
-        <nav className="hidden md:flex items-center space-x-1">
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link, index) => (
             <motion.div
               key={link.name}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.3 }}
+              transition={{ delay: index * 0.07 + 0.2 }}
             >
               <Link
                 to={link.link}
-                activeClass="text-cyan"
+                activeClass="text-gold-active"
                 smooth={true}
                 spy={true}
-                offset={-100}
+                offset={-90}
                 duration={800}
-                className="relative px-3 py-2 mx-1 text-white hover:text-cyan text-sm font-medium transition-colors"
+                className="relative px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-lg cursor-pointer"
+                style={{ color: 'rgba(232,232,232,0.8)', fontFamily: "'Inter', sans-serif" }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.color = '#D4A843';
+                  e.currentTarget.style.background = 'rgba(212,168,67,0.07)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.color = 'rgba(232,232,232,0.8)';
+                  e.currentTarget.style.background = 'transparent';
+                }}
               >
                 {link.name}
-                <motion.span
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan origin-left"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
               </Link>
             </motion.div>
           ))}
           <motion.button
             onClick={handleResumeClick}
-            className="ml-4 px-4 py-2 bg-cyan text-black rounded-lg font-semibold hover:bg-green transition-colors text-sm"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="btn-gold ml-3 text-sm"
+            style={{ padding: '0.5rem 1.1rem', fontFamily: "'Inter', sans-serif" }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: navLinks.length * 0.1 + 0.3 }}
+            transition={{ delay: navLinks.length * 0.07 + 0.25 }}
           >
-            $ cat resume
+            Resume ↗
           </motion.button>
         </nav>
       </motion.div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden fixed inset-0 z-40 bg-terminal-black/95 backdrop-blur-md"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.3 }}
+            className="md:hidden fixed inset-0 z-40 flex flex-col"
+            style={{ background: 'rgba(8,8,8,0.97)', backdropFilter: 'blur(30px)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            <div className="flex flex-col items-center justify-center h-full space-y-6">
+            {/* Close button */}
+            <div className="flex justify-end p-5">
+              <motion.button
+                onClick={() => setOpen(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-lg"
+                style={{ border: '1px solid rgba(212,168,67,0.3)', color: '#D4A843' }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <XMarkIcon className="w-5 h-5" />
+              </motion.button>
+            </div>
+            <div className="flex flex-col items-center justify-center flex-1 gap-6 -mt-16">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  exit={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.07 }}
+                  exit={{ opacity: 0, x: -20 }}
                 >
                   <Link
                     to={link.link}
-                    activeClass="text-cyan"
                     smooth={true}
                     spy={true}
-                    offset={-100}
+                    offset={-90}
                     duration={800}
-                    className="text-xl font-bold text-white hover:text-cyan transition-colors"
+                    className="text-2xl font-semibold transition-colors cursor-pointer"
+                    style={{ color: 'rgba(232,232,232,0.85)', fontFamily: "'Inter', sans-serif" }}
                     onClick={() => setOpen(false)}
+                    onMouseEnter={e => e.currentTarget.style.color = '#D4A843'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(232,232,232,0.85)'}
                   >
                     {link.name}
                   </Link>
                 </motion.div>
               ))}
               <motion.button
-                onClick={handleResumeClick}
-                className="px-8 py-3 bg-cyan text-black rounded-lg font-semibold hover:bg-green transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
+                onClick={() => { handleResumeClick(); setOpen(false); }}
+                className="btn-gold mt-4"
+                style={{ padding: '0.7rem 2rem', fontSize: '1rem' }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
+                transition={{ delay: navLinks.length * 0.07 }}
               >
-                $ cat resume
+                Download Resume ↗
               </motion.button>
             </div>
           </motion.div>
