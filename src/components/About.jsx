@@ -38,7 +38,7 @@ const About = () => {
           <span className="section-label">01 — About</span>
           <h2 className="section-title mt-2">Who I Am</h2>
           <div className="section-divider" />
-          <p className="mt-4 max-w-xl" style={{ color: 'rgba(232,232,232,0.5)', fontSize: '0.95rem', fontFamily: "'Inter', sans-serif" }}>
+          <p className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block" style={{ color: 'rgba(232,232,232,0.65)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}>
             Builder. Entrepreneur. Engineer. I've turned complex ideas into real products people love.
           </p>
         </motion.div>

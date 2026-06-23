@@ -64,7 +64,14 @@ const Home = () => {
           variants={fadeIn("up", 0.2)}
           initial="hidden"
           animate="show"
-          className="md:w-3/5 flex flex-col items-start"
+          className="md:w-[58%] flex flex-col items-start p-6 md:p-8 rounded-2xl"
+          style={{
+            background: 'rgba(12, 13, 20, 0.72)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(212, 168, 67, 0.22)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+          }}
         >
           {/* Label */}
           <motion.div

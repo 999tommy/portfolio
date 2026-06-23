@@ -18,8 +18,8 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Certificates from './components/Certificates'
 import Footer from './shared/Footer'
-import ParticlesBackground from './components/ParticlesBackground'
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+const ParticlesBackground = lazy(() => import('./components/ParticlesBackground'));
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -51,7 +51,9 @@ const Layout = () => {
       exit="out"
       variants={pageVariants}
     >
-      <ParticlesBackground />
+      <Suspense fallback={<div className="fixed inset-0 bg-[#0c0d14]" />}>
+        <ParticlesBackground />
+      </Suspense>
       <ScrollToTop />
       <Header />
       <AnimatePresence mode="wait">

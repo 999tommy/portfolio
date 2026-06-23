@@ -58,14 +58,11 @@ const Particles = ({ count = 1200 }) => {
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      particlesGeometry.attributes.position.array[i3 + 1] +=
-        Math.cos(time * particles[i].speed + particles[i].factor) * 0.0008;
-      particlesGeometry.attributes.position.array[i3 + 2] +=
-        Math.sin(time * particles[i].speed + particles[i].factor) * 0.0008;
+    if (mesh.current) {
+      // Hardware-accelerated rotation instead of heavy CPU coordinate recalculations
+      mesh.current.rotation.y = time * 0.03;
+      mesh.current.rotation.x = time * 0.015;
     }
-    particlesGeometry.attributes.position.needsUpdate = true;
     if (light.current) {
       light.current.position.set(
         Math.sin(time * 0.25) * 6,

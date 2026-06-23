@@ -54,7 +54,7 @@ const Contact = () => {
           <span className="section-label">05 — Contact</span>
           <h2 className="section-title mt-2">Let's Work Together</h2>
           <div className="section-divider" />
-          <p className="mt-4 max-w-xl" style={{ color: 'rgba(232,232,232,0.5)', fontSize: '0.95rem', fontFamily: "'Inter', sans-serif" }}>
+          <p className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block" style={{ color: 'rgba(232,232,232,0.65)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}>
             Have a project in mind, or just want to chat? I'm always open to interesting conversations and collaboration.
           </p>
         </motion.div>

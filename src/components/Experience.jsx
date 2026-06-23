@@ -183,7 +183,7 @@ const Experience = () => {
           <span className="section-label">02 — Experience</span>
           <h2 className="section-title mt-2">Career Timeline</h2>
           <div className="section-divider" />
-          <p className="mt-4 max-w-xl" style={{ color: 'rgba(232,232,232,0.5)', fontSize: '0.95rem', fontFamily: "'Inter', sans-serif" }}>
+          <p className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block" style={{ color: 'rgba(232,232,232,0.65)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}>
             From pharma labs to founding a tech startup — a track record of delivering beyond expectations.
           </p>
         </motion.div>
