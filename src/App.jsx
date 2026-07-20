@@ -1,4 +1,4 @@
-// app.jsx — full redesign with dark-gold glassmorphism
+// app.jsx — root layout with Lenis smooth scroll + cursor
 import './App.css'
 import {
   createBrowserRouter,
@@ -18,19 +18,14 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Certificates from './components/Certificates'
 import Footer from './shared/Footer'
+import Cursor from './components/Cursor'
 import { useEffect, lazy, Suspense } from 'react';
-const ParticlesBackground = lazy(() => import('./components/ParticlesBackground'));
+import Lenis from 'lenis';
 
 const pageVariants = {
   initial: { opacity: 0 },
-  in: {
-    opacity: 1,
-    transition: { duration: 0.6, ease: "easeInOut" }
-  },
-  out: {
-    opacity: 0,
-    transition: { duration: 0.4, ease: "easeInOut" }
-  }
+  in:  { opacity: 1, transition: { duration: 0.55, ease: "easeInOut" } },
+  out: { opacity: 0, transition: { duration: 0.35, ease: "easeInOut" } },
 };
 
 const ScrollToTop = () => {
@@ -41,31 +36,49 @@ const ScrollToTop = () => {
   return null;
 }
 
+// Lenis smooth scroll init
+const useLenis = () => {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
+};
+
 const Layout = () => {
+  useLenis();
+
   return (
     <motion.div
-      className='relative font-sans overflow-x-hidden'
-      style={{ background: '#0c0d14', color: '#e8e8e8', minHeight: '100vh' }}
+      className='relative overflow-x-hidden'
+      style={{ background: 'var(--obsidian)', color: 'var(--text-primary)', minHeight: '100vh' }}
       initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants}
     >
-      <Suspense fallback={<div className="fixed inset-0 bg-[#0c0d14]" />}>
-        <ParticlesBackground />
-      </Suspense>
+      {/* Custom cursor (hidden on touch) */}
+      <Cursor />
       <ScrollToTop />
       <Header />
-      <AnimatePresence mode="wait">
-        <Home />
-        <About />
-        <Experience />
-        <Projects />
-        <Certificates />
-        <ScrollRestoration />
-        <Outlet />
-        <Contact />
-      </AnimatePresence>
+      <Home />
+      <About />
+      <Experience />
+      <Projects />
+      <Certificates />
+      <ScrollRestoration />
+      <Outlet />
+      <Contact />
       <Footer />
     </motion.div>
   )
@@ -76,12 +89,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path='/' element={<Layout />}></Route>
       <Route path='/projects' element={
-        <motion.div
-          initial="initial"
-          animate="in"
-          exit="out"
-          variants={pageVariants}
-        >
+        <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
           <Projects />
         </motion.div>
       }></Route>

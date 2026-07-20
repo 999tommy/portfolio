@@ -1,95 +1,183 @@
-// about.jsx — premium dark-gold glassmorphism redesign
+// about.jsx — editorial layout, improved professional copy, animated counters
 /* eslint-disable react/no-unescaped-entities */
 import skills from "../skills";
 import { useInView } from 'react-intersection-observer';
-import { motion } from "framer-motion";
-import { fadeIn } from "../variants";
+import { motion, useMotionValue, useSpring, animate } from "framer-motion";
+import { useEffect, useRef } from 'react';
+
+const Counter = ({ to, suffix = '' }) => {
+  const nodeRef = useRef(null);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 });
+
+  useEffect(() => {
+    if (!inView || !nodeRef.current) return;
+    const controls = animate(0, to, {
+      duration: 1.8,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate(value) {
+        if (nodeRef.current) nodeRef.current.textContent = Math.round(value) + suffix;
+      },
+    });
+    return controls.stop;
+  }, [inView, to, suffix]);
+
+  return <span ref={(el) => { nodeRef.current = el; ref(el); }}>0{suffix}</span>;
+};
+
+const SkillChip = ({ skill, index }) => (
+  <motion.div
+    key={skill.id}
+    initial={{ opacity: 0, scale: 0.88 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.03, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    className="skill-chip"
+    whileHover={{ scale: 1.06 }}
+  >
+    {skill.title}
+  </motion.div>
+);
+
+const highlights = [
+  { icon: "🎓", title: "BSc Biochemistry",       sub: "Rigorous scientific foundation applied to engineering" },
+  { icon: "📜", title: "NRRT Certified",          sub: "Professional Software Engineering certification"       },
+  { icon: "👑", title: "CEO & Founder",           sub: "Axist Technologies · axist.app"                       },
+  { icon: "🚀", title: "10,000+ Users",           sub: "Built and scaled two products entirely solo"           },
+];
 
 const About = () => {
-  const [ref, inView] = useInView({ threshold: 0.15, triggerOnce: false });
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: false });
 
-  const skillVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.06 } }
+  const fadeUp = {
+    hidden: { opacity: 0, y: 28 },
+    show: {
+      opacity: 1, y: 0,
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+    }
   };
-  const skillItemVariants = {
-    hidden: { y: 14, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 60 } }
-  };
-
-  const highlights = [
-    { icon: "🎓", title: "BSc Biochemistry", sub: "University-level sciences foundation" },
-    { icon: "📜", title: "NRRT Certified", sub: "Software Engineering Certification" },
-    { icon: "👑", title: "CEO & Founder", sub: "Axist Technologies · axist.app" },
-    { icon: "🚀", title: "10K+ Users", sub: "2 products built solo" },
-  ];
 
   return (
     <section className='relative' id='about' ref={ref}>
       <div className="section-container">
         {/* Section header */}
         <motion.div
-          variants={fadeIn("up", 0.2)}
+          variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mb-14"
+          className="mb-16"
         >
-          <span className="section-label">01 — About</span>
-          <h2 className="section-title mt-2">Who I Am</h2>
+          <span className="section-eyebrow">01 — About</span>
+          <h2 className="section-title mt-2">The Builder Behind the Work</h2>
           <div className="section-divider" />
-          <p className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block" style={{ color: 'rgba(232,232,232,0.65)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}>
-            Builder. Entrepreneur. Engineer. I've turned complex ideas into real products people love.
+          <p
+            className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block"
+            style={{ color: 'rgba(242,242,242,0.6)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}
+          >
+            Engineering discipline meets entrepreneurial ambition. I don't just write code — I build companies.
           </p>
         </motion.div>
 
+        {/* Animated stat row */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
+          {[
+            { value: 10000, suffix: '+', label: 'Combined Users'  },
+            { value: 15,    suffix: '+', label: 'Products Shipped' },
+            { value: 5,     suffix: '+', label: 'Years in Tech'   },
+            { value: 3,     suffix: '',  label: 'Live Ventures'   },
+          ].map(({ value, suffix, label }) => (
+            <motion.div
+              key={label}
+              className="glass-card p-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div
+                className="font-bold text-2xl text-amber-gradient mb-0.5"
+                style={{ fontFamily: "'Syne', sans-serif", letterSpacing: '-0.03em' }}
+              >
+                <Counter to={value === 10000 ? 10 : value} suffix={value === 10000 ? 'K+' : suffix} />
+              </div>
+              <div className="text-xs" style={{ color: 'rgba(242,242,242,0.45)', fontFamily: "'Inter', sans-serif" }}>
+                {label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Left: Bio */}
+          {/* ── LEFT: Bio ───────────────────────────────────── */}
           <motion.div
-            variants={fadeIn("right", 0.3)}
+            variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.3 }}
-            className="lg:w-1/2 flex flex-col gap-6"
+            viewport={{ once: false, amount: 0.2 }}
+            className="lg:w-1/2 flex flex-col gap-5"
           >
             {/* Bio card */}
             <div className="glass-card p-7">
-              <h3 className="font-bold text-lg mb-4" style={{ color: '#D4A843', fontFamily: "'Inter', sans-serif" }}>
+              <h3
+                className="font-bold text-base mb-4"
+                style={{ color: 'var(--amber)', fontFamily: "'Syne', sans-serif", letterSpacing: '-0.01em' }}
+              >
                 My Story
               </h3>
-              <div className="space-y-4" style={{ fontSize: '0.9rem', color: 'rgba(232,232,232,0.72)', lineHeight: '1.8', fontFamily: "'Inter', sans-serif" }}>
+              <div
+                className="space-y-4"
+                style={{ fontSize: '0.9rem', color: 'rgba(242,242,242,0.68)', lineHeight: '1.85', fontFamily: "'Inter', sans-serif" }}
+              >
                 <p>
-                  I'm <strong style={{ color: '#f0f0f0' }}>Tommy Adegboye</strong>, CEO & Founder of{' '}
-                  <a href="https://axist.app" target="_blank" rel="noreferrer" style={{ color: '#D4A843' }}>Axist Technologies</a> — a software startup 
-                  I built from the ground up into a platform serving <strong style={{ color: '#f0f0f0' }}>10,000+ combined users</strong>, entirely solo. 
-                  I specialize in fullstack engineering, AI automation, and building products at scale.
+                  I'm <strong style={{ color: 'var(--text-primary)' }}>Tommy Adegboye</strong> — a fullstack software engineer
+                  and tech entrepreneur who builds products that scale. As CEO & Founder of{' '}
+                  <a href="https://axist.app" target="_blank" rel="noreferrer" style={{ color: 'var(--amber)' }}>Axist Technologies</a>,
+                  I took a concept from zero to a platform serving{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>over 10,000 combined users</strong> — entirely as a solo founder.
+                  No co-founder. No external funding. Just engineering, product thinking, and relentless execution.
                 </p>
                 <p>
-                  Academically, I hold a <strong style={{ color: '#f0f0f0' }}>BSc in Biochemistry</strong> and an{' '}
-                  <strong style={{ color: '#f0f0f0' }}>NRRT Certificate in Software Engineering</strong> — a unique scientific 
-                  background that gives me a distinct edge in precision thinking, problem decomposition, and data-driven engineering.
+                  My background is unconventional by design. I hold a{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>BSc in Biochemistry</strong> alongside an{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>NRRT Software Engineering Certificate</strong> — a combination
+                  that gives me a rare precision in debugging complex systems, structuring data pipelines,
+                  and making evidence-based architectural decisions.
                 </p>
                 <p>
-                  I've interned at <strong style={{ color: '#f0f0f0' }}>Vitabiotics Nigeria Ltd.</strong>, a top pharmaceutical company, 
-                  delivering research-grade quality standards in everything I produce. Beyond Axist, I run{' '}
-                  <a href="https://naijabiz.org" target="_blank" rel="noreferrer" style={{ color: '#D4A843' }}>NaijaBiz.org</a> — 
-                  a business directory for the Nigerian market — and have delivered multiple high-complexity contracts for clients worldwide.
+                  Professionally, I've shipped production software across Africa, Europe, and North America —
+                  including enterprise admin systems at{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>DropInnovation</strong>, research-grade work at{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>Vitabiotics Nigeria</strong>, and a portfolio of
+                  freelance contracts in fintech, e-commerce, and media. I also run{' '}
+                  <a href="https://naijabiz.org" target="_blank" rel="noreferrer" style={{ color: 'var(--amber)' }}>NaijaBiz.org</a>{' '}
+                  — a business discovery platform for the Nigerian market.
                 </p>
                 <p>
-                  I build with <strong style={{ color: '#f0f0f0' }}>Next.js, Node.js, TypeScript, React Native</strong>, and deeply integrated 
-                  <strong style={{ color: '#f0f0f0' }}> AI/LLM pipelines</strong> using LangChain and OpenAI. If there's a system to optimize 
-                  or a workflow to automate, I'm the person for it.
+                  My core specialisation is <strong style={{ color: 'var(--text-primary)' }}>AI automation and fullstack architecture</strong> —
+                  building intelligent systems with LangChain, OpenAI, and n8n that eliminate manual bottlenecks
+                  and create compounding leverage for businesses.
                 </p>
               </div>
 
               <div className="mt-6 flex flex-wrap gap-2">
                 <a href="https://axist.app" target="_blank" rel="noreferrer">
-                  <motion.button className="btn-gold text-sm" style={{ padding: '0.5rem 1.1rem' }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                  <motion.button
+                    className="btn-amber"
+                    style={{ padding: '0.5rem 1.2rem', fontSize: '0.83rem' }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     Visit Axist ↗
                   </motion.button>
                 </a>
                 <a href="https://naijabiz.org" target="_blank" rel="noreferrer">
-                  <motion.button className="btn-ghost text-sm" style={{ padding: '0.5rem 1.1rem' }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                  <motion.button
+                    className="btn-ghost"
+                    style={{ padding: '0.5rem 1.2rem', fontSize: '0.83rem' }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     NaijaBiz ↗
                   </motion.button>
                 </a>
@@ -101,77 +189,89 @@ const About = () => {
               {highlights.map(({ icon, title, sub }) => (
                 <motion.div
                   key={title}
-                  className="glass-card p-4 flex flex-col gap-1"
-                  whileHover={{ scale: 1.02 }}
+                  className="glass-card p-4 flex flex-col gap-1.5"
+                  whileHover={{ scale: 1.03 }}
                 >
                   <span style={{ fontSize: '1.3rem' }}>{icon}</span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f0f0f0', fontFamily: "'Inter', sans-serif" }}>{title}</span>
-                  <span style={{ fontSize: '0.72rem', color: 'rgba(212,168,67,0.7)', fontFamily: "'Inter', sans-serif" }}>{sub}</span>
+                  <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: "'Syne', sans-serif" }}>
+                    {title}
+                  </span>
+                  <span style={{ fontSize: '0.72rem', color: 'rgba(232,130,10,0.65)', fontFamily: "'Inter', sans-serif" }}>
+                    {sub}
+                  </span>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right: Skills */}
+          {/* ── RIGHT: Skills + Focus ──────────────────────── */}
           <motion.div
-            variants={fadeIn("left", 0.4)}
+            variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.3 }}
-            className="lg:w-1/2 flex flex-col gap-6"
+            viewport={{ once: false, amount: 0.2 }}
+            className="lg:w-1/2 flex flex-col gap-5"
           >
+            {/* Tech stack */}
             <div className="glass-card p-7">
-              <h3 className="font-bold text-lg mb-5" style={{ color: '#D4A843', fontFamily: "'Inter', sans-serif" }}>
+              <h3
+                className="font-bold text-base mb-5"
+                style={{ color: 'var(--amber)', fontFamily: "'Syne', sans-serif", letterSpacing: '-0.01em' }}
+              >
                 Tech Stack
               </h3>
-              <motion.div
-                className="flex flex-wrap gap-2"
-                variants={skillVariants}
-                initial="hidden"
-                animate={inView ? "show" : "hidden"}
-              >
-                {skills.map((skill, i) => (
-                  <motion.div
-                    key={`${skill.id}-${i}`}
-                    variants={skillItemVariants}
-                    className="skill-chip"
-                  >
-                    {skill.title}
-                  </motion.div>
-                ))}
-              </motion.div>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill, i) => <SkillChip key={skill.id} skill={skill} index={i} />)}
+              </div>
             </div>
 
-            {/* Current focus card */}
-            <div className="glass-card p-6" style={{ border: '1px solid rgba(212,168,67,0.25)' }}>
+            {/* Current focus */}
+            <div className="glass-card p-6" style={{ border: '1px solid rgba(232,130,10,0.24)' }}>
               <div className="flex items-center gap-2 mb-3">
-                <span style={{ color: '#D4A843', fontSize: '0.75rem', fontFamily: "'JetBrains Mono', monospace" }}>
-                  ⚡ CURRENT FOCUS
+                <span
+                  className="w-2 h-2 rounded-full animate-pulse-amber"
+                  style={{ background: 'var(--amber)', boxShadow: '0 0 8px rgba(232,130,10,0.8)', flexShrink: 0 }}
+                />
+                <span style={{ color: 'var(--amber)', fontSize: '0.68rem', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em' }}>
+                  CURRENT FOCUS
                 </span>
               </div>
-              <h4 className="font-bold mb-3" style={{ color: '#f0f0f0', fontSize: '0.95rem', fontFamily: "'Inter', sans-serif" }}>
-                AI Automation & Product Growth
+              <h4
+                className="font-bold mb-3"
+                style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontFamily: "'Syne', sans-serif" }}
+              >
+                Scaling Axist & AI Infrastructure
               </h4>
-              <p style={{ fontSize: '0.85rem', color: 'rgba(232,232,232,0.6)', lineHeight: '1.7', fontFamily: "'Inter', sans-serif" }}>
-                Currently scaling Axist — building AI-powered automation systems, LLM-integrated product pipelines, 
-                and complex backend workflows for creator brands and enterprise clients. 
-                Obsessed with shipping things that actually move the needle.
+              <p style={{ fontSize: '0.85rem', color: 'rgba(242,242,242,0.58)', lineHeight: '1.75', fontFamily: "'Inter', sans-serif" }}>
+                Currently expanding Axist Technologies' platform — developing multi-tenant AI automation infrastructure,
+                LLM-integrated content pipelines, and advanced analytics systems. I'm also consulting on{' '}
+                <strong style={{ color: 'var(--text-primary)' }}>AI strategy and integration</strong> for select clients
+                looking to automate complex business workflows.
               </p>
-              <div className="hr-gold mt-4" />
-              <div className="flex flex-wrap gap-2 mt-3">
-                {['AI Engineering', 'LangChain', 'Next.js', 'OpenAI API', 'n8n'].map(t => (
-                  <span key={t} className="skill-chip" style={{ fontSize: '0.7rem' }}>{t}</span>
+              <div className="hr-amber mt-4 mb-3" />
+              <div className="flex flex-wrap gap-2">
+                {['AI Engineering', 'LangChain', 'Next.js 15', 'OpenAI API', 'n8n', 'Supabase'].map(t => (
+                  <span key={t} className="skill-chip" style={{ fontSize: '0.68rem' }}>{t}</span>
                 ))}
               </div>
             </div>
 
-            {/* Social marketing note */}
-            <div className="glass-card p-4 flex items-start gap-3">
-              <span style={{ fontSize: '1.1rem', marginTop: '2px' }}>📣</span>
+            {/* What I bring */}
+            <div className="glass-card p-5 flex items-start gap-4">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: 'rgba(232,130,10,0.1)', border: '1px solid rgba(232,130,10,0.22)', fontSize: '1.1rem' }}
+              >
+                🏗️
+              </div>
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#f0f0f0', fontFamily: "'Inter', sans-serif" }}>Social Media Marketing</div>
-                <div style={{ fontSize: '0.78rem', color: 'rgba(232,232,232,0.55)', marginTop: '2px', fontFamily: "'Inter', sans-serif" }}>
-                  Hands-on growth experience — managed brand strategy, content, and audience building for Axist's digital presence.
+                <div style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: "'Syne', sans-serif", marginBottom: '4px' }}>
+                  What Sets Me Apart
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'rgba(242,242,242,0.52)', fontFamily: "'Inter', sans-serif", lineHeight: '1.7' }}>
+                  I bridge the gap between engineering and entrepreneurship. I've lived on both sides —
+                  as a builder shipping features and as a founder making product, revenue, and hiring decisions.
+                  That dual perspective means I build software with business impact in mind, not just technical elegance.
                 </div>
               </div>
             </div>

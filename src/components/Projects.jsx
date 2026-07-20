@@ -1,60 +1,82 @@
-// projects.jsx — premium dark-gold projects section
+// projects.jsx — improved grid layout, editorial section design
 import projects from "../projects";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
-import { fadeIn } from "../variants";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+};
 
 const Projects = () => {
+  const featured = projects.filter(p => p.featured);
+  const rest      = projects.filter(p => !p.featured);
+
   return (
     <section className="relative" id="projects">
       <div className="section-container">
         {/* Section header */}
         <motion.div
-          variants={fadeIn("up", 0.2)}
+          variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mb-14"
+          className="mb-16"
         >
-          <span className="section-label">03 — Projects</span>
+          <span className="section-eyebrow">03 — Projects</span>
           <h2 className="section-title mt-2">What I've Built</h2>
           <div className="section-divider" />
-          <p className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block" style={{ color: 'rgba(232,232,232,0.65)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}>
-            A selection of products, platforms, and experiments — from AI-powered SaaS to blockchain apps, each built with intention.
+          <p
+            className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block"
+            style={{ color: 'rgba(242,242,242,0.6)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}
+          >
+            A curated selection of products, platforms, and engineering projects — spanning AI automation,
+            blockchain, and SaaS applications. Each built with care, shipped to production.
           </p>
         </motion.div>
 
-        {/* Projects grid */}
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: index * 0.07 }}
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              <ProjectCard project={project} />
-            </motion.div>
-          ))}
-        </div>
+        {/* Featured projects — larger 2-column */}
+        {featured.length > 0 && (
+          <div className="mb-10">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="section-eyebrow" style={{ opacity: 0.55 }}>Featured</span>
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(232,130,10,0.25), transparent)' }} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {featured.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Other projects — 3-column grid */}
+        {rest.length > 0 && (
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="section-eyebrow" style={{ opacity: 0.55 }}>Other Work</span>
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(232,130,10,0.25), transparent)' }} />
+            </div>
+            <div className="projects-grid">
+              {rest.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={featured.length + index} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* GitHub CTA */}
         <motion.div
-          className="mt-14 text-center"
+          className="mt-16 text-center"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <p className="mb-5 text-sm" style={{ color: 'rgba(232,232,232,0.4)', fontFamily: "'Inter', sans-serif" }}>
-            More projects and open-source contributions on GitHub
+          <p className="mb-5 text-sm" style={{ color: 'rgba(242,242,242,0.35)', fontFamily: "'JetBrains Mono', monospace" }}>
+            // More experiments, open-source contributions, and weekend projects
           </p>
-          <a
-            href="https://github.com/999tommy"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://github.com/999tommy" target="_blank" rel="noreferrer">
             <motion.button
               className="btn-ghost"
               whileHover={{ scale: 1.04 }}
