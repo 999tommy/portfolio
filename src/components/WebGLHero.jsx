@@ -1,5 +1,4 @@
-// WebGLHero.jsx — custom GLSL shader aurora background
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -49,16 +48,32 @@ const fragmentShader = `
     return 130.0 * dot(m, g);
   }
 
-  float fbm(vec2 uv) {
+  // Fast 2-octave FBM for inner domain warping
+  float fbmLow(vec2 uv) {
     float v = 0.0;
     float a = 0.5;
     vec2  shift = vec2(100.0);
     mat2  rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-    for (int i = 0; i < 5; ++i) {
-      v += a * snoise(uv);
-      uv = rot * uv * 2.0 + shift;
-      a *= 0.5;
-    }
+    v += a * snoise(uv);
+    uv = rot * uv * 2.0 + shift;
+    a *= 0.5;
+    v += a * snoise(uv);
+    return v;
+  }
+
+  // Fast 3-octave FBM for final noise computation
+  float fbmMed(vec2 uv) {
+    float v = 0.0;
+    float a = 0.5;
+    vec2  shift = vec2(100.0);
+    mat2  rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+    v += a * snoise(uv);
+    uv = rot * uv * 2.0 + shift;
+    a *= 0.5;
+    v += a * snoise(uv);
+    uv = rot * uv * 2.0 + shift;
+    a *= 0.5;
+    v += a * snoise(uv);
     return v;
   }
 
@@ -73,14 +88,14 @@ const fragmentShader = `
 
     // Layered noise for flowing energy
     vec2 q;
-    q.x = fbm(uv + 0.1 * t);
-    q.y = fbm(uv + vec2(1.0));
+    q.x = fbmLow(uv + 0.1 * t);
+    q.y = fbmLow(uv + vec2(1.0));
 
     vec2 r;
-    r.x = fbm(uv + 1.0 * q + vec2(1.7, 9.2) + 0.15 * t + mouseInfl);
-    r.y = fbm(uv + 1.0 * q + vec2(8.3, 2.8) + 0.126 * t);
+    r.x = fbmLow(uv + 1.0 * q + vec2(1.7, 9.2) + 0.15 * t + mouseInfl);
+    r.y = fbmLow(uv + 1.0 * q + vec2(8.3, 2.8) + 0.126 * t);
 
-    float f = fbm(uv + r);
+    float f = fbmMed(uv + r);
     f = clamp((f * f * f + 0.6 * f * f + 0.5 * f) * 0.6, 0.0, 1.0);
 
     // Deep obsidian base
@@ -150,8 +165,28 @@ const ShaderPlane = ({ mouseRef }) => {
 };
 
 const WebGLHero = ({ mouseRef }) => {
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.0 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       style={{
         position: 'absolute',
         inset: 0,
@@ -160,7 +195,8 @@ const WebGLHero = ({ mouseRef }) => {
       }}
     >
       <Canvas
-        dpr={Math.min(window.devicePixelRatio, 1.6)}
+        dpr={Math.min(window.devicePixelRatio, 1.25)}
+        frameloop={isVisible ? 'always' : 'never'}
         camera={{ position: [0, 0, 1], near: 0.1, far: 10 }}
         gl={{
           antialias: false,

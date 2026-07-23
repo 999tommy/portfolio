@@ -103,6 +103,7 @@ body {
   transform: translate(-50%, -50%);
   transition: width 0.2s, height 0.2s, background 0.2s;
   mix-blend-mode: difference;
+  will-change: transform;
 }
 
 .cursor-ring {
@@ -119,6 +120,7 @@ body {
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.2s;
+  will-change: transform;
 }
 
 .cursor-ring.is-hovering {

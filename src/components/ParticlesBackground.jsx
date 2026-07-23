@@ -3,7 +3,7 @@ import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Particles = ({ count = 1200 }) => {
+const Particles = ({ count = 400 }) => {
   const mesh = useRef();
   const light = useRef();
 
@@ -96,7 +96,14 @@ const ParticlesBackground = () => {
       className="fixed top-0 left-0 w-full h-full"
       style={{ zIndex: 0, background: '#0c0d14', pointerEvents: 'none' }}
     >
-      <Canvas camera={{ position: [0, 0, 4.5], fov: 70 }}>
+      <Canvas
+        camera={{ position: [0, 0, 4.5], fov: 70 }}
+        dpr={1}
+        gl={{
+          antialias: false,
+          powerPreference: 'high-performance',
+        }}
+      >
         <Particles />
       </Canvas>
     </div>

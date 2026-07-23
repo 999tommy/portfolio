@@ -17,8 +17,7 @@ const Cursor = () => {
     const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      dot.style.left = `${mouseX}px`;
-      dot.style.top  = `${mouseY}px`;
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
     };
 
     const lerp = (a, b, n) => a + (b - a) * n;
@@ -26,8 +25,7 @@ const Cursor = () => {
     const animate = () => {
       ringX = lerp(ringX, mouseX, 0.12);
       ringY = lerp(ringY, mouseY, 0.12);
-      ring.style.left = `${ringX}px`;
-      ring.style.top  = `${ringY}px`;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
       rafId = requestAnimationFrame(animate);
     };
 
