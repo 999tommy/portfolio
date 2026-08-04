@@ -39,10 +39,10 @@ const SkillChip = ({ skill, index }) => (
 );
 
 const highlights = [
-  { icon: "🎓", title: "BSc Biochemistry",       sub: "Rigorous scientific foundation applied to engineering" },
-  { icon: "📜", title: "NRRT Certified",          sub: "Professional Software Engineering certification"       },
-  { icon: "👑", title: "CEO & Founder",           sub: "Axist Technologies · axist.app"                       },
-  { icon: "🚀", title: "10,000+ Users",           sub: "Built and scaled two products entirely solo"           },
+  { icon: "🎓", title: "BSc Biochemistry",       sub: "Analytical precision applied to software engineering" },
+  { icon: "🏗️", title: "5+ Years Engineering",   sub: "Building production software since 2019"              },
+  { icon: "🚀", title: "Founder, Axist",          sub: "Scaled to 5K+ users as a solo founder"                },
+  { icon: "☁️", title: "AWS Certified",           sub: "AWS Solutions Architect certification"                },
 ];
 
 const About = () => {
@@ -68,23 +68,23 @@ const About = () => {
           className="mb-16"
         >
           <span className="section-eyebrow">01 — About</span>
-          <h2 className="section-title mt-2">The Builder Behind the Work</h2>
+          <h2 className="section-title mt-2">The Engineer Behind the Work</h2>
           <div className="section-divider" />
           <p
             className="mt-4 max-w-xl glass px-6 py-2.5 rounded-xl inline-block"
             style={{ color: 'rgba(242,242,242,0.6)', fontSize: '0.88rem', fontFamily: "'Inter', sans-serif" }}
           >
-            Engineering discipline meets entrepreneurial ambition. I don't just write code — I build companies.
+            Software engineer first. Building clean, scalable applications — and the occasional startup on the side.
           </p>
         </motion.div>
 
         {/* Animated stat row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
           {[
-            { value: 10000, suffix: '+', label: 'Combined Users'  },
-            { value: 15,    suffix: '+', label: 'Products Shipped' },
-            { value: 5,     suffix: '+', label: 'Years in Tech'   },
-            { value: 3,     suffix: '',  label: 'Live Ventures'   },
+            { value: 5000, suffix: '+', label: 'Combined Users'  },
+            { value: 15,   suffix: '+', label: 'Projects Shipped' },
+            { value: 5,    suffix: '+', label: 'Years in Tech'   },
+            { value: 3,    suffix: '',  label: 'Live Products'   },
           ].map(({ value, suffix, label }) => (
             <motion.div
               key={label}
@@ -99,7 +99,7 @@ const About = () => {
                 className="font-bold text-2xl text-amber-gradient mb-0.5"
                 style={{ fontFamily: "'Syne', sans-serif", letterSpacing: '-0.03em' }}
               >
-                <Counter to={value === 10000 ? 10 : value} suffix={value === 10000 ? 'K+' : suffix} />
+                <Counter to={value >= 5000 ? 5 : value} suffix={value >= 5000 ? 'K+' : suffix} />
               </div>
               <div className="text-xs" style={{ color: 'rgba(242,242,242,0.45)', fontFamily: "'Inter', sans-serif" }}>
                 {label}
@@ -131,32 +131,23 @@ const About = () => {
               >
                 <p>
                   I'm <strong style={{ color: 'var(--text-primary)' }}>Tommy Adegboye</strong> — a fullstack software engineer
-                  and tech entrepreneur who builds products that scale. As CEO & Founder of{' '}
-                  <a href="https://axist.app" target="_blank" rel="noreferrer" style={{ color: 'var(--amber)' }}>Axist Technologies</a>,
-                  I took a concept from zero to a platform serving{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>over 10,000 combined users</strong> — entirely as a solo founder.
-                  No co-founder. No external funding. Just engineering, product thinking, and relentless execution.
+                  with 5+ years building production applications across web and mobile. My core focus is crafting
+                  robust, scalable systems: clean APIs, fast frontends, and infrastructure that holds up under real traffic.
                 </p>
                 <p>
                   My background is unconventional by design. I hold a{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>BSc in Biochemistry</strong> alongside an{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>NRRT Software Engineering Certificate</strong> — a combination
-                  that gives me a rare precision in debugging complex systems, structuring data pipelines,
-                  and making evidence-based architectural decisions.
+                  <strong style={{ color: 'var(--text-primary)' }}>BSc in Biochemistry</strong> alongside software engineering
+                  certifications from NRRT, AWS, and AltSchool Africa — a combination that gives me a rare precision in
+                  debugging complex systems, structuring data pipelines, and making evidence-based architectural decisions.
                 </p>
                 <p>
-                  Professionally, I've shipped production software across Africa, Europe, and North America —
+                  I've shipped production software for clients across Africa, Europe, and North America —
                   including enterprise admin systems at{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>DropInnovation</strong>, research-grade work at{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>Vitabiotics Nigeria</strong>, and a portfolio of
-                  freelance contracts in fintech, e-commerce, and media. I also run{' '}
-                  <a href="https://naijabiz.org" target="_blank" rel="noreferrer" style={{ color: 'var(--amber)' }}>NaijaBiz.org</a>{' '}
-                  — a business discovery platform for the Nigerian market.
-                </p>
-                <p>
-                  My core specialisation is <strong style={{ color: 'var(--text-primary)' }}>AI automation and fullstack architecture</strong> —
-                  building intelligent systems with LangChain, OpenAI, and n8n that eliminate manual bottlenecks
-                  and create compounding leverage for businesses.
+                  <strong style={{ color: 'var(--text-primary)' }}>DropInnovation</strong> and freelance contracts
+                  spanning fintech, e-commerce, and media. I also founded{' '}
+                  <a href="https://axist.app" target="_blank" rel="noreferrer" style={{ color: 'var(--amber)' }}>Axist Technologies</a>
+                  {' '}— an AI SaaS platform I built and grew to{' '}
+                  <strong style={{ color: 'var(--text-primary)' }}>5,000+ combined users</strong> as a solo founder.
                 </p>
               </div>
 

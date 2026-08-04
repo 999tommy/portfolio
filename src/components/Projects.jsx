@@ -2,13 +2,14 @@
 import projects from "../projects";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const Projects = () => {
+const Projects = ({ standalone = false }) => {
   const featured = projects.filter(p => p.featured);
   const rest      = projects.filter(p => !p.featured);
 
@@ -86,6 +87,26 @@ const Projects = () => {
             </motion.button>
           </a>
         </motion.div>
+        
+        {standalone && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mt-10 text-center"
+          >
+            <Link to="/">
+              <motion.button
+                className="btn-ghost"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                ← Back to Home
+              </motion.button>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );

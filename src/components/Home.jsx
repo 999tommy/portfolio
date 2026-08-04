@@ -4,7 +4,7 @@ import LinkedIn from "../assets/socials/linkedin.svg";
 import Twitter from "../assets/socials/twitter.svg";
 import Instagram from '../assets/socials/ig.svg';
 import GitHub from "../assets/socials/github.svg";
-import ResumePDF from "../assets/Adegboye_Ayotomide_Resume.pdf";
+import ResumePDF from "../assets/cv_resume.pdf";
 import profileImg from '../assets/me.png';
 import { TypeAnimation } from "react-type-animation";
 import { Link } from 'react-scroll';
@@ -138,7 +138,7 @@ const Home = () => {
             className="text-lg font-medium mb-6"
             style={{ color: 'rgba(242,242,242,0.5)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.01em' }}
           >
-            Tech Entrepreneur · Fullstack Engineer · AI Builder
+            Fullstack Engineer · AI Builder · Founder, Axist Technologies
           </motion.p>
 
           {/* Typewriter */}
@@ -147,12 +147,11 @@ const Home = () => {
               <span style={{ color: 'rgba(232,130,10,0.45)' }}>// </span>
               <TypeAnimation
                 sequence={[
-                  'Grew Axist Technologies to 10K+ users — solo.', 2400,
-                  'CEO & Founder, Axist Technologies.', 2200,
-                  'Engineering products that generate real revenue.', 2200,
+                  'Building scalable fullstack applications.', 2200,
+                  'React · Next.js · Node.js · TypeScript.', 2000,
                   'AI automation systems at production scale.', 2000,
-                  'From idea to 10K users without a co-founder.', 2400,
-                  'Fullstack. Founder. Relentlessly building.', 2200,
+                  'Grew Axist Technologies to 5K+ users — solo.', 2400,
+                  'Turning complex problems into clean code.', 2200,
                 ]}
                 speed={58}
                 repeat={Infinity}
@@ -167,7 +166,9 @@ const Home = () => {
             className="mb-8 leading-relaxed max-w-lg"
             style={{ color: 'rgba(242,242,242,0.58)', fontSize: '0.95rem', fontFamily: "'Inter', sans-serif" }}
           >
-            I'm the CEO & Founder of{' '}
+            I'm a <strong style={{ color: 'var(--text-primary)' }}>Fullstack Software Engineer</strong> who builds
+            fast, scalable web and mobile applications — from frontend interfaces to backend APIs and cloud infrastructure.
+            I also founded{' '}
             <a
               href="https://axist.app"
               target="_blank"
@@ -178,9 +179,7 @@ const Home = () => {
             >
               Axist Technologies
             </a>{' '}
-            — a venture I built from zero to <strong style={{ color: 'var(--text-primary)' }}>10,000+ combined users</strong>, entirely as
-            a solo founder. I specialise in fullstack engineering, AI automation pipelines, and scaling
-            products that generate real, measurable impact.
+            — a SaaS platform I built and scaled to <strong style={{ color: 'var(--text-primary)' }}>5,000+ combined users</strong> as a solo founder.
           </motion.p>
 
           {/* CTAs */}
@@ -257,9 +256,9 @@ const Home = () => {
 
           {/* Stat cards */}
           <div className="flex gap-3 flex-wrap justify-center md:justify-end">
-            <StatCard value="10K+" label="Combined Users" delay={0.6} />
-            <StatCard value="15+" label="Products Built" delay={0.7} />
-            <StatCard value="5+" label="Years Building" delay={0.8} />
+            <StatCard value="5K+"  label="Combined Users" delay={0.6} />
+            <StatCard value="15+"  label="Projects Built" delay={0.7} />
+            <StatCard value="5+"   label="Years Building" delay={0.8} />
           </div>
 
           {/* Terminal neofetch card */}
@@ -282,11 +281,11 @@ const Home = () => {
                 <span className="text-white font-bold">tommy</span>@<span style={{ color: 'var(--amber)' }}>axist.app</span>
               </div>
               <div style={{ color: 'rgba(242,242,242,0.25)' }}>─────────────────</div>
-              <div><span style={{ color: 'var(--amber-dim)' }}>Role:</span> CEO & Founder, Axist Technologies</div>
-              <div><span style={{ color: 'var(--amber-dim)' }}>Stack:</span> Next.js · Node.js · AI/LLM · TypeScript</div>
+              <div><span style={{ color: 'var(--amber-dim)' }}>Role:</span> Fullstack Software Engineer</div>
+              <div><span style={{ color: 'var(--amber-dim)' }}>Stack:</span> Next.js · Node.js · AWS · TypeScript</div>
               <div><span style={{ color: 'var(--amber-dim)' }}>Uptime:</span> 5+ years building in production</div>
               <div><span style={{ color: 'var(--amber-dim)' }}>Degree:</span> BSc Biochemistry</div>
-              <div><span style={{ color: 'var(--amber-dim)' }}>Certs:</span> NRRT · Meta · IBM · freeCodeCamp</div>
+              <div><span style={{ color: 'var(--amber-dim)' }}>Founded:</span> Axist Technologies (axist.app)</div>
               <div>
                 <span style={{ color: 'var(--amber-dim)' }}>Status:</span>{' '}
                 <span

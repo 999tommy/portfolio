@@ -1,4 +1,4 @@
-// app.jsx — root layout with Lenis smooth scroll + cursor
+// app.jsx — root layout with Lenis smooth scroll + cursor + page routing
 import './App.css'
 import {
   createBrowserRouter,
@@ -19,13 +19,13 @@ import Experience from './components/Experience'
 import Certificates from './components/Certificates'
 import Footer from './shared/Footer'
 import Cursor from './components/Cursor'
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect } from 'react';
 import Lenis from 'lenis';
 
 const pageVariants = {
   initial: { opacity: 0 },
-  in:  { opacity: 1, transition: { duration: 0.55, ease: "easeInOut" } },
-  out: { opacity: 0, transition: { duration: 0.35, ease: "easeInOut" } },
+  in:  { opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } },
+  out: { opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
 };
 
 const ScrollToTop = () => {
@@ -55,6 +55,29 @@ const useLenis = () => {
   }, []);
 };
 
+// Shared page shell used by sub-pages (Projects, Credentials)
+const PageShell = ({ children }) => {
+  useLenis();
+  return (
+    <motion.div
+      className='relative overflow-x-hidden'
+      style={{ background: 'var(--obsidian)', color: 'var(--text-primary)', minHeight: '100vh' }}
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+    >
+      <Cursor />
+      <ScrollToTop />
+      <Header />
+      <div style={{ paddingTop: '7rem' }}>
+        {children}
+      </div>
+      <Footer />
+    </motion.div>
+  );
+};
+
 const Layout = () => {
   useLenis();
 
@@ -74,8 +97,6 @@ const Layout = () => {
       <Home />
       <About />
       <Experience />
-      <Projects />
-      <Certificates />
       <ScrollRestoration />
       <Outlet />
       <Contact />
@@ -87,12 +108,17 @@ const Layout = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path='/' element={<Layout />}></Route>
+      <Route path='/' element={<Layout />} />
       <Route path='/projects' element={
-        <motion.div initial="initial" animate="in" exit="out" variants={pageVariants}>
-          <Projects />
-        </motion.div>
-      }></Route>
+        <PageShell>
+          <Projects standalone />
+        </PageShell>
+      } />
+      <Route path='/credentials' element={
+        <PageShell>
+          <Certificates standalone />
+        </PageShell>
+      } />
     </Route>
   )
 )

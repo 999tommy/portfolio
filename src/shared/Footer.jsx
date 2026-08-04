@@ -1,15 +1,20 @@
 // footer.jsx — clean minimal footer, electric amber redesign
 import { FaLinkedin, FaGithub, FaTwitter, FaInstagram } from 'react-icons/fa';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { motion } from 'framer-motion';
 
-const navLinks = [
-  { name: "Home",        link: "home"         },
-  { name: "About",       link: "about"        },
-  { name: "Experience",  link: "experience"   },
-  { name: "Projects",    link: "projects"     },
-  { name: "Credentials", link: "certificates" },
-  { name: "Contact",     link: "contact"      },
+// scroll-based links (home page only)
+const scrollLinks = [
+  { name: "About",      link: "about"      },
+  { name: "Experience", link: "experience" },
+  { name: "Contact",    link: "contact"    },
+];
+
+// page-based links
+const pageLinks = [
+  { name: "Projects",     href: "/projects"     },
+  { name: "Credentials",  href: "/credentials"  },
 ];
 
 const socials = [
@@ -21,6 +26,8 @@ const socials = [
 
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   return (
     <footer style={{ borderTop: '1px solid rgba(232,130,10,0.1)', background: 'rgba(5,6,12,0.98)' }}>
@@ -75,20 +82,59 @@ const Footer = () => {
           <div>
             <div className="section-eyebrow mb-5">Navigation</div>
             <div className="grid grid-cols-2 gap-x-10 gap-y-2.5">
-              {navLinks.map((link) => (
-                <Link
+              {/* Home */}
+              <RouterLink
+                to="/"
+                className="text-sm cursor-pointer transition-colors nav-link"
+                style={{ color: 'rgba(242,242,242,0.4)', fontFamily: "'Inter', sans-serif", display: 'inline-block' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--amber)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(242,242,242,0.4)'}
+              >
+                Home
+              </RouterLink>
+
+              {/* Scroll links */}
+              {scrollLinks.map((link) => (
+                isHome ? (
+                  <ScrollLink
+                    key={link.name}
+                    to={link.link}
+                    smooth={true}
+                    duration={800}
+                    offset={-90}
+                    className="text-sm cursor-pointer transition-colors nav-link"
+                    style={{ color: 'rgba(242,242,242,0.4)', fontFamily: "'Inter', sans-serif", display: 'inline-block' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--amber)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(242,242,242,0.4)'}
+                  >
+                    {link.name}
+                  </ScrollLink>
+                ) : (
+                  <RouterLink
+                    key={link.name}
+                    to={`/#${link.link}`}
+                    className="text-sm cursor-pointer transition-colors nav-link"
+                    style={{ color: 'rgba(242,242,242,0.4)', fontFamily: "'Inter', sans-serif", display: 'inline-block' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--amber)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(242,242,242,0.4)'}
+                  >
+                    {link.name}
+                  </RouterLink>
+                )
+              ))}
+
+              {/* Page links */}
+              {pageLinks.map((link) => (
+                <RouterLink
                   key={link.name}
-                  to={link.link}
-                  smooth={true}
-                  duration={800}
-                  offset={-90}
+                  to={link.href}
                   className="text-sm cursor-pointer transition-colors nav-link"
                   style={{ color: 'rgba(242,242,242,0.4)', fontFamily: "'Inter', sans-serif", display: 'inline-block' }}
                   onMouseEnter={e => e.currentTarget.style.color = 'var(--amber)'}
                   onMouseLeave={e => e.currentTarget.style.color = 'rgba(242,242,242,0.4)'}
                 >
                   {link.name}
-                </Link>
+                </RouterLink>
               ))}
             </div>
           </div>
